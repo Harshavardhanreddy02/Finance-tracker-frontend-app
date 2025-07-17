@@ -1,8 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector ,useDispatch} from "react-redux";
+import { deletetransaction } from "../../redux/feautures/transaction";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 function Transaction({ onAddClick }) {
+
+  const [showdeletedmodel,setshowdeletedmodel] = useState(false);
+  const [selectedid, setselectedid] = useState(null);
   const transactions = useSelector((state) => state.transaction.transaction);
+  const dispatch = useDispatch();
+
+
 
   return (
     <>
@@ -46,17 +55,59 @@ function Transaction({ onAddClick }) {
                       ? `+$${t.amount}`
                       : `-$${Math.abs(t.amount)}`}
                   </td>
+                  <td>
+                  <button
+                    onClick={()=>{
+                          setselectedid(t.id),
+                        setshowdeletedmodel(true);
+
+                    }
+                  }
+                    className=" cursor-pointer p-1 text-black hover:text-red-700"
+                  >
+                 <TrashIcon className="h-5 w-5" />
+
+                </button>
+                  </td>
                 </tr>
+                
               ))
             ) : (
               <tr>
-                <td colSpan="4" className="text-center py-4 text-gray-400">
+                <td colSpan="5" className="text-center py-4 text-gray-400">
                   No transactions yet
                 </td>
               </tr>
             )}
           </tbody>
         </table>
+
+        {showdeletedmodel && (
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded shadow-lg text-center">
+      <h3 className="text-lg font-semibold mb-4">Confirm Delete</h3>
+      <p className="mb-4 text-gray-600">Are you sure you want to delete this transaction?</p>
+      <div className="flex justify-center gap-4">
+        <button
+          onClick={() => {
+            dispatch(deletetransaction(selectedid));
+            setshowdeletedmodel(false);
+          }}
+          className="cursor-pointer bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+        >
+          Yes, Delete
+        </button>
+        <button
+          onClick={() => setshowdeletedmodel(false)}
+          className= "bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 cursor-pointer"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
       </div>
     </>
   );

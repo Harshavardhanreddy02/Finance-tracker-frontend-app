@@ -55,8 +55,8 @@ function Transactionform({ onClose }) {
   const incomeCategories = ['Salary', 'Others'];
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center ">
+      <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg transform transition-all duration-500 ease-out scale-95 opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
         <div className="flex justify-between mb-4">
           <h2 className="text-xl font-semibold">Add Transaction</h2>
           <button
