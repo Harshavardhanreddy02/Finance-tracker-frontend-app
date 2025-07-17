@@ -3,12 +3,15 @@ import Header from '../components/Header';
 import StatCard from '../components/Statcard';
 import Transaction from '../components/forms/Transaction';
 import Transactionform from '../components/forms/Transactionform';
-import PieChart from '../components/Piechart';
-import Goalbox from '../components/Goalbox';
+import PieChart from '../components/Piechartimage';
+import Goalbox from '../components/Goal/Goalbox';
 import { useSelector } from 'react-redux';
+import Piechartimage from '../components/Piechartimage';
+import Goaltable from '../components/Goal/Goaltable';
 
 function Dashboard() {
   const [showModal, setShowModal] = useState(false);
+  const [showGoalModal, setShowGoalModal] = useState(false);
 
     const transactions = useSelector((state) => state.transaction.transaction);
 
@@ -36,8 +39,9 @@ function Dashboard() {
         </div>
 
         <div className="space-y-4">
-          <PieChart />
-          <Goalbox />
+          <Piechartimage />
+          <Goalbox onclick={() => setShowGoalModal(true)}/>
+            {showGoalModal && <Goaltable onClose={() => setShowGoalModal(false)} />}
         </div>
       </div>
     </>
