@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const goalSlice = createSlice({
   name: 'goal',
   initialState: {
-    goals: [] // start with empty list
+    goals: [] 
   },
   reducers: {
     addGoal: (state, action) => {
@@ -21,9 +21,13 @@ const goalSlice = createSlice({
       goal.current = goal.target; 
     }
   }
-}
+} ,
+ cleargoals: (state) =>
+ {
+        state.goals = []
+ }
   }
 });
 
-export const { addGoal, deleteGoal, updateGoal } = goalSlice.actions;
+export const { addGoal, deleteGoal, updateGoal,cleargoals } = goalSlice.actions;
 export default goalSlice.reducer;
